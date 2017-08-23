@@ -21,12 +21,16 @@
     </div>
 
     <!-- {{ tweetsList }} -->
-    <div class="tweets-list">
-      <ul>
-        <li v-for="tweet in tweetsList">
-          {{ tweet }}
-        </li>
-      </ul>
+    <div class="timeline">
+      <div class="header">
+        <h4>Timeline</h4>
+      </div>
+
+      <div class="tweets-list">
+        <div v-for="tweet in tweetsList" class="tweet-content">
+          <p>{{ tweet }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -64,13 +68,18 @@
 </script>
 
 <style>
+  body {
+      background-color: #e6ecf0;
+  }
+
   .composer {
     margin-left: 30%;
     width: 40%;
     border: 0.5px solid rgba(0,0,0,.1);
+    background-color: white;
   }
 
-  .composer > .header > h4 {
+  .header > h4 {
     margin: 10px 0;
   }
 
@@ -112,8 +121,27 @@
     color: #801515;
   }
 
-  .tweets-list {
-    width: 40%;
+  .timeline {
+    background-color: white;
+    margin-top: 20px;
     margin-left: 30%;
+    border: 0.5px solid rgba(0,0,0,.1);
+    border-bottom: none;
+    width: 40%;
+  }
+
+  .timeline > .tweets-list {
+    background-color: #f4f4f4 !important;
+    overflow: auto;
+  }
+
+  .timeline > .tweets-list p {
+    text-align: left;
+    margin-left: 5%;
+  }
+
+  .tweet-content {
+    height: 100%;
+    border-bottom: 1px solid rgba(0,0,0,.1);
   }
 </style>
