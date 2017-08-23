@@ -1,22 +1,33 @@
 <template>
-  <div class="composer">
-    <div class="header">
-      <h4>Compose new Tweet</h4>
-    </div>
-    <div class="content">
-      <div class="tweet-area">
-        <textarea rows="3" v-model="tweet"/>
+  <div>
+    <div class="composer">
+      <div class="header">
+        <h4>Compose new Tweet</h4>
       </div>
-      <div class="tweet-btn">
-        <span v-bind:class="[{ 'light-red' : lessThanTen, 'dark-red' : lessThanTwenty }]">{{ charactersRemaining }}</span>
-        <button :disabled="tweetIsOutOfRange">Tweet</button>
+      <div class="content">
+        <div class="tweet-area">
+          <textarea rows="3" v-model="tweet"/>
+        </div>
+        <div class="tweet-btn">
+          <span v-bind:class="[{ 'light-red' : lessThanTen, 'dark-red' : lessThanTwenty }]">{{ charactersRemaining }}</span>
+          <button :disabled="tweetIsOutOfRange" @click="submitTweet()">Tweet</button>
+        </div>
       </div>
+
+      <!-- <p>The value of <strong>tweet</strong> is: {{ tweet }}</p>
+      <p>The length of <strong>tweet</strong> is: {{ tweet.length }}</p>
+      <p>The length of <strong>charactersRemaining</strong> is: {{ charactersRemaining }}</p>
+      <p>The length of <strong>tweetIsOutOfRange</strong> is: {{ tweetIsOutOfRange  }}</p> -->
     </div>
 
-    <!-- <p>The value of <strong>tweet</strong> is: {{ tweet }}</p>
-    <p>The length of <strong>tweet</strong> is: {{ tweet.length }}</p>
-    <p>The length of <strong>charactersRemaining</strong> is: {{ charactersRemaining }}</p>
-    <p>The length of <strong>tweetIsOutOfRange</strong> is: {{ tweetIsOutOfRange  }}</p> -->
+    <!-- {{ tweetsList }} -->
+    <div class="tweets-list">
+      <ul>
+        <li v-for="tweet in tweetsList">
+          {{ tweet }}
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -28,6 +39,7 @@
     data() {
       return {
         tweet: '',
+        tweetsList: [],
       };
     },
     computed: {
@@ -42,6 +54,10 @@
       },
       lessThanTen() {
         return this.charactersRemaining <= 10;
+      },
+      submitTweet() {
+        this.tweetsList.push(this.tweet);
+        this.tweet = '';
       },
     },
   };
@@ -94,5 +110,10 @@
 
   .dark-red {
     color: #801515;
+  }
+
+  .tweets-list {
+    width: 40%;
+    margin-left: 30%;
   }
 </style>
