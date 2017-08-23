@@ -7,11 +7,13 @@
 
 <script>
   import Composer from './Composer';
+  import TweetsList from './TweetsList';
 
   export default {
     name: 'homepage',
     components: {
       composer: Composer,
+      tweetsList: TweetsList,
     },
   };
 </script>

@@ -8,13 +8,15 @@
         <textarea rows="3" v-model="tweet"/>
       </div>
       <div class="tweet-btn">
-        <span>{{ charactersRemaining }}</span>
+        <span v-bind:class="[{ 'light-red' : lessThanTen, 'dark-red' : lessThanTwenty }]">{{ charactersRemaining }}</span>
         <button :disabled="tweetIsOutOfRange">Tweet</button>
       </div>
     </div>
 
     <!-- <p>The value of <strong>tweet</strong> is: {{ tweet }}</p>
-    <p>The value of <strong>tweetIsEmpty</strong> is: {{ tweetIsEmpty }}</p> -->
+    <p>The length of <strong>tweet</strong> is: {{ tweet.length }}</p>
+    <p>The length of <strong>charactersRemaining</strong> is: {{ charactersRemaining }}</p>
+    <p>The length of <strong>tweetIsOutOfRange</strong> is: {{ tweetIsOutOfRange  }}</p> -->
   </div>
 </template>
 
@@ -34,6 +36,12 @@
       },
       charactersRemaining() {
         return MAX_TWEET_LENGTH - this.tweet.length;
+      },
+      lessThanTwenty() {
+        return this.charactersRemaining <= 20 && this.charactersRemaining > 10;
+      },
+      lessThanTen() {
+        return this.charactersRemaining <= 10;
       },
     },
   };
@@ -78,5 +86,13 @@
   .composer > p {
     text-align: left;
     margin-left: 5%;
+  }
+
+  .light-red {
+    color: red;
+  }
+
+  .dark-red {
+    color: #801515;
   }
 </style>
