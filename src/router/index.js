@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Homepage from '@/components/Homepage';
+import Timeline from '@/components/Timeline';
 
 Vue.use(Router);
 
@@ -8,8 +8,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Homepage',
-      component: Homepage,
+      name: 'Timeline',
+      component: Timeline,
     },
   ],
 });
