@@ -8,13 +8,19 @@
         <textarea rows="3" v-model="tweet"/>
       </div>
       <div class="tweet-btn">
-        <button :disabled="tweetIsEmpty">Tweet</button>
+        <span>{{ charactersRemaining }}</span>
+        <button :disabled="tweetIsOutOfRange">Tweet</button>
       </div>
     </div>
+
+    <!-- <p>The value of <strong>tweet</strong> is: {{ tweet }}</p>
+    <p>The value of <strong>tweetIsEmpty</strong> is: {{ tweetIsEmpty }}</p> -->
   </div>
 </template>
 
 <script>
+  const MAX_TWEET_LENGTH = 140;
+
   export default {
     name: 'composer',
     data() {
@@ -23,8 +29,11 @@
       };
     },
     computed: {
-      tweetIsEmpty() {
-        return this.tweet.length === 0;
+      tweetIsOutOfRange() {
+        return this.charactersRemaining === MAX_TWEET_LENGTH || this.charactersRemaining < 0;
+      },
+      charactersRemaining() {
+        return MAX_TWEET_LENGTH - this.tweet.length;
       },
     },
   };
@@ -63,9 +72,11 @@
 
   .composer > .content > .tweet-btn {
     padding-top: 10px;
+    float: right;
   }
 
-  .composer > .content > .tweet-btn > button {
-    float: right;
+  .composer > p {
+    text-align: left;
+    margin-left: 5%;
   }
 </style>
